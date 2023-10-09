@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Validation</title>
+    <style>
+      table {
+        margin: 20px;
+      }
+      th,
+      td {
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Form Validation</h1>
+    <form id="myForm" onsubmit="return validateForm()">
+      <table>
+        <tr>
+          <td><label for="username">Username:</label></td>
+          <td><input type="text" id="username" required /></td>
+        </tr>
+        <tr>
+          <td><label for="password">Password:</label></td>
+          <td><input type="password" id="password" required /></td>
+        </tr>
+        <tr>
+          <td><label for="confirmPassword">Re-enter Password:</label></td>
+          <td><input type="password" id="confirmPassword" required /></td>
+        </tr>
+        <tr>
+          <td><label for="phone">Phone Number:</label></td>
+          <td><input type="tel" id="phone" maxlength="10" /></td>
+        </tr>
+        <tr>
+          <td><label for="pincode">Pin Code:</label></td>
+          <td><input type="text" id="pincode" maxlength="6" /></td>
+        </tr>
+        <tr>
+          <td colspan="2"><input type="submit" value="Submit" /></td>
+        </tr>
+      </table>
+    </form>
+    <p id="errorMessages"></p>
+    <script>
+      function validateForm() {
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value.trim();
+        const confirmPassword = document
+          .getElementById("confirmPassword")
+          .value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const pincode = document.getElementById("pincode").value.trim();
+        let errorMessages = "";
+        if (username.length < 8) {
+          errorMessages += "Username should be at least 8 characters.\n";
+        }
+        if (password.length < 8) {
+          errorMessages += "Password should be at least 8 characters.\n";
+        }
+        if (password !== confirmPassword) {
+          errorMessages += "Passwords do not match.\n";
+        }
+        if (phone.length > 10) {
+          errorMessages += "Phone number should be at most 10 digits.\n";
+        }
+        if (pincode.length > 6) {
+          errorMessages += "Pin code should be at most 6 digits.\n";
+        }
+        if (errorMessages) {
+          alert(errorMessages);
+          return false;
+        }
+        return true;
+      }
+    </script>
+  </body>
+</html>
